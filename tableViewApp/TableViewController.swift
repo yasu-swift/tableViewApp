@@ -13,6 +13,23 @@ class TableViewController: UITableViewController {
     var names:[String] = ["米倉", "川田", "金子", "高橋", "磯辺", "渋谷", ]
     //受け皿
     var resultArray = [String]()
+    //ここから追加
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            self.resultArray.remove(at: indexPath.row)    //ここに記述
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+        UserDefaults.standard.removeObject(forKey: "add")
+        UserDefaults.standard.set(resultArray, forKey: "add")
+    }
+    //ここまで追加
+    
+    
+    
     //何度も読み込む
     override func viewWillAppear(_ animated: Bool) {
         
